@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+
+type FormData = {
+  token: string;
+};
 
 const Container = styled.div``;
 
@@ -8,6 +13,10 @@ const App: React.FC<{}> = () => {
   const [url] = useState<string>('http://localhost:3000/');
   const [count, setCount] = useState<number>(0);
   const [tasks, setTasks] = useState<string[]>([]);
+  const { register, handleSubmit, errors } = useForm<FormData>();
+  const onSubmit = handleSubmit(({ token }) => {
+    console.log(token);
+  });
 
   useEffect(() => {
     document.title = `You clicked ${count} times`;
@@ -34,6 +43,13 @@ const App: React.FC<{}> = () => {
           click
         </button>
       </div>
+      <div>
+        <form onSubmit={onSubmit}>
+          <input name="token" ref={register} />
+          <button type="submit">submit</button>
+        </form>
+      </div>
+
       <div>
         {tasks.map(task => (
           <p key={task}>{task}</p>
