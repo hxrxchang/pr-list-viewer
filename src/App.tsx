@@ -7,7 +7,11 @@ type FormData = {
   token: string;
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  .error-message {
+    color: red;
+  }
+`;
 
 const App: React.FC<{}> = () => {
   const [url] = useState<string>('http://localhost:3000/');
@@ -45,8 +49,9 @@ const App: React.FC<{}> = () => {
       </div>
       <div>
         <form onSubmit={onSubmit}>
-          <input name="token" ref={register} />
+          <input name="token" ref={register({ required: true })} />
           <button type="submit">submit</button>
+          {errors.token && <p className="error-message">token is required</p>}
         </form>
       </div>
 
