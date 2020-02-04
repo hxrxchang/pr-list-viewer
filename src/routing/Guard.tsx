@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useTokenQuery as token } from '../queries/token-query';
 
 const Guard: React.FC<{
   children: React.ReactNode;
@@ -10,7 +11,7 @@ const Guard: React.FC<{
       path={path}
       render={({ location }) =>
         // todo: queryを作って条件判定
-        true ? (
+        token() ? (
           children
         ) : (
           <Redirect to={{ pathname: 'sign-in', state: { from: location } }} />
