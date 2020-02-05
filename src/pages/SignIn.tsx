@@ -22,7 +22,11 @@ const SignInPage: React.FC<{}> = () => {
     <Container>
       <div>
         <form onSubmit={onSubmit}>
-          <input name="token" ref={register({ required: true })} />
+          <input
+            name="token"
+            ref={register({ required: true })}
+            placeholder="GitHub token"
+          />
           <button type="submit">submit</button>
           {errors.token && <p className="error-message">token is required</p>}
         </form>
