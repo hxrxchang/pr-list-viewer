@@ -57,8 +57,8 @@ const SearchPage: React.FC<{}> = () => {
         <button type="submit">submit</button>
       </form>
       <div>
-        {pullRequests.map((pullRequest: { id: string }) => (
-          <div key={pullRequest.id}>{pullRequest.id}</div>
+        {pullRequests.map(pullRequest => (
+          <div key={pullRequest.title}>{pullRequest.title}</div>
         ))}
       </div>
     </Container>
