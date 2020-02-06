@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 
-import { useTokenQuery as fetchToken } from '../queries/token-query';
+import { useTokenQuery as fetchToken } from '../queries/TokenQuery';
 
 const baseUrl = 'https://api.github.com';
 
