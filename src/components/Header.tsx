@@ -31,9 +31,9 @@ const HeaderComponent: React.FC<{}> = () => {
       <a
         href="https://github.com/hxrxchang/pr-list-viewer"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
-        <img className="icon" src={GitHubIcon} />
+        <img className="icon" src={GitHubIcon} alt="GitHub Icon" />
       </a>
     </Container>
   );
