@@ -13,7 +13,7 @@ const fetchPullRequests = async (
   reposotoryName: string,
   baseBranch: string
 ) => {
-  const url = `${baseUrl}/repos/${teamName}/${reposotoryName}/pulls?base=${baseBranch}`;
+  const url = `${baseUrl}/repos/${teamName}/${reposotoryName}/pulls?base=${baseBranch}&state=closed`;
   return Axios.get(url, {
     headers: {
       Authorization: `Bearer ${fetchToken()}`
@@ -53,7 +53,9 @@ const SearchPage: React.FC<{}> = () => {
           ref={register({ required: true })}
           placeholder="GitHub Team Name"
         />
-        {errors.teamName && <p className="error-message">token is required</p>}
+        {errors.teamName && (
+          <p className="error-message">GitHub team name is required</p>
+        )}
         <br />
         <input
           name="repositoryName"
@@ -61,7 +63,7 @@ const SearchPage: React.FC<{}> = () => {
           placeholder="repository name"
         />
         {errors.repositoryName && (
-          <p className="error-message">token is required</p>
+          <p className="error-message">Repository name is required</p>
         )}
         <br />
         <input
@@ -70,7 +72,7 @@ const SearchPage: React.FC<{}> = () => {
           placeholder="base branch"
         />
         {errors.baseBranch && (
-          <p className="error-message">token is required</p>
+          <p className="error-message">BaseBranch name is required</p>
         )}
         <br />
         <button type="submit">submit</button>
