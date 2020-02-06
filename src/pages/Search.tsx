@@ -1,27 +1,7 @@
 import React from 'react';
-import { Axios } from 'axios-observable';
-import { map } from 'rxjs/operators';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-
-import { useTokenQuery as fetchToken } from '../queries/TokenQuery';
-
-const baseUrl = 'https://api.github.com';
-
-const fetchPullRequests = async (
-  teamName: string,
-  reposotoryName: string,
-  baseBranch: string
-) => {
-  const url = `${baseUrl}/repos/${teamName}/${reposotoryName}/pulls?base=${baseBranch}&state=closed`;
-  return Axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${fetchToken()}`
-    }
-  })
-    .pipe(map(respnse => respnse.data))
-    .toPromise();
-};
+import { usePullRequests } from '../hooks/PullRequests';
 
 type SearchFormData = {
   teamName: string;
@@ -37,11 +17,10 @@ const Container = styled.div`
 
 const SearchPage: React.FC<{}> = () => {
   const { register, handleSubmit, errors } = useForm<SearchFormData>();
+  const { pullRequests, fetchPullRequests } = usePullRequests();
 
   const onSubmit = handleSubmit(({ teamName, repositoryName, baseBranch }) => {
-    fetchPullRequests(teamName, repositoryName, baseBranch).then(res =>
-      console.log(res)
-    );
+    fetchPullRequests(teamName, repositoryName, baseBranch);
   });
 
   return (
@@ -77,6 +56,11 @@ const SearchPage: React.FC<{}> = () => {
         <br />
         <button type="submit">submit</button>
       </form>
+      <div>
+        {pullRequests.map((pullRequest: { id: string }) => (
+          <div key={pullRequest.id}>{pullRequest.id}</div>
+        ))}
+      </div>
     </Container>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useTokenQuery as fetchToken } from '../queries/TokenQuery';
+import { useTokenQuery as fetchToken } from '../hooks/TokenQuery';
 
 const Guard: React.FC<{
   children: React.ReactNode;
