@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { usePullRequests } from '../hooks/PullRequests';
+import HeaderComponent from '../components/Header';
 
 type SearchFormData = {
   teamName: string;
@@ -25,6 +26,7 @@ const SearchPage: React.FC<{}> = () => {
 
   return (
     <Container>
+      <HeaderComponent></HeaderComponent>
       <h1>SearchPage work</h1>
       <form onSubmit={onSubmit}>
         <input

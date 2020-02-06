@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import HeaderComponent from '../components/Header';
 
 type FormData = {
   token: string;
@@ -20,6 +21,7 @@ const SignInPage: React.FC<{}> = () => {
 
   return (
     <Container>
+      <HeaderComponent></HeaderComponent>
       <div>
         <form onSubmit={onSubmit}>
           <input
