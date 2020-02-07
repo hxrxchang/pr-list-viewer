@@ -12,6 +12,7 @@ const Container = styled.header`
   .title {
     color: white;
     line-height: 12px;
+    font-size: 24px;
     font-weight: 600;
   }
 
@@ -27,7 +28,7 @@ const Container = styled.header`
 const HeaderComponent: React.FC<{}> = () => {
   return (
     <Container>
-      <p className="title">Pull Request Viewer</p>
+      <h1 className="title">Pull Request Viewer</h1>
       <a
         href="https://github.com/hxrxchang/pr-list-viewer"
         target="_blank"
