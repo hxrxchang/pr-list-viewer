@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { usePullRequests } from '../hooks/PullRequests';
+import { useTokenQuery } from '../hooks/TokenQuery';
 import HeaderComponent from '../components/Header';
 
 type SearchFormData = {
@@ -68,9 +69,12 @@ const Container = styled.div`
 const SearchPage: React.FC<{}> = () => {
   const { register, handleSubmit, errors } = useForm<SearchFormData>();
   const { pullRequests, fetchPullRequests } = usePullRequests();
+  const { token } = useTokenQuery();
 
   const onSubmit = handleSubmit(({ teamName, repositoryName, baseBranch }) => {
-    fetchPullRequests(teamName, repositoryName, baseBranch);
+    if (token !== null) {
+      fetchPullRequests(teamName, repositoryName, baseBranch, token);
+    }
   });
 
   return (

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Axios } from 'axios-observable';
 import { map } from 'rxjs/operators';
-import { useTokenQuery as fetchToken } from './TokenQuery';
 
 const baseUrl = 'https://api.github.com';
 type PullRequest = {
@@ -15,12 +14,13 @@ export function usePullRequests() {
   const fetchPullRequests = async (
     teamName: string,
     reposotoryName: string,
-    baseBranch: string
+    baseBranch: string,
+    token: string
   ) => {
     const url = `${baseUrl}/repos/${teamName}/${reposotoryName}/pulls?base=${baseBranch}&state=closed`;
     return Axios.get(url, {
       headers: {
-        Authorization: `Bearer ${fetchToken()}`
+        Authorization: `Bearer ${token}`
       }
     })
       .pipe(map(respnse => respnse.data as PullRequest[]))
