@@ -11,8 +11,53 @@ type SearchFormData = {
 };
 
 const Container = styled.div`
+  .page-content {
+    padding: 0 20%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-form-wrapper {
+    margin: 20px 0 40px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-form {
+    width: 100%;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .search-form-input {
+    display: block;
+    width: 100%;
+    height: 36px;
+    border: 1px solid #d1d5da;
+    border-radius: 0.25rem;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
   .error-message {
     color: red;
+  }
+
+  .form-button {
+    display: block;
+    width: 100%;
+    height: 32px;
+    text-align: center;
+    border: 1px solid #d1d5da;
+    border-radius: 0.25rem;
+    font-size: 16px;
+    background-color: #f5f5f5;
+    cursor: pointer;
   }
 `;
 
@@ -27,45 +72,59 @@ const SearchPage: React.FC<{}> = () => {
   return (
     <Container>
       <HeaderComponent></HeaderComponent>
-      <h1>SearchPage work</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          name="teamName"
-          ref={register({ required: true })}
-          placeholder="GitHub Team Name"
-        />
-        {errors.teamName && (
-          <p className="error-message">GitHub team name is required</p>
-        )}
-        <br />
-        <input
-          name="repositoryName"
-          ref={register({ required: true })}
-          placeholder="repository name"
-        />
-        {errors.repositoryName && (
-          <p className="error-message">Repository name is required</p>
-        )}
-        <br />
-        <input
-          name="baseBranch"
-          ref={register({ required: true })}
-          placeholder="base branch"
-        />
-        {errors.baseBranch && (
-          <p className="error-message">BaseBranch name is required</p>
-        )}
-        <br />
-        <button type="submit">submit</button>
-      </form>
-      <div>
-        <code>
-          {pullRequests.map(pullRequest => (
-            <p key={pullRequest.title}>
-              - [{pullRequest.title}]({pullRequest.url})
-            </p>
-          ))}
-        </code>
+      <div className="page-content">
+        {/* TODO: コンポーネント切り出し */}
+        <div className="search-form-wrapper">
+          <form className="search-form" onSubmit={onSubmit}>
+            <div className="search-form-input-wrapper">
+              <label className="form-label">Organization Name</label>
+              <input
+                className="search-form-input"
+                name="teamName"
+                ref={register({ required: true })}
+              />
+              {errors.teamName && (
+                <p className="error-message">GitHub team name is required</p>
+              )}
+            </div>
+
+            <div className="search-form-input-wrapper">
+              <label className="form-label">Repository Name</label>
+              <input
+                className="search-form-input"
+                name="repositoryName"
+                ref={register({ required: true })}
+              />
+              {errors.repositoryName && (
+                <p className="error-message">Repository name is required</p>
+              )}
+            </div>
+            <div className="search-form-input-wrapper">
+              <label className="form-label">Base Branch Name</label>
+              <input
+                className="search-form-input"
+                name="baseBranch"
+                ref={register({ required: true })}
+              />
+
+              {errors.baseBranch && (
+                <p className="error-message">BaseBranch name is required</p>
+              )}
+            </div>
+            <button className="form-button" type="submit">
+              submit
+            </button>
+          </form>
+        </div>
+        <div className="pull-request-list">
+          <code>
+            {pullRequests.map(pullRequest => (
+              <p key={pullRequest.title}>
+                - [{pullRequest.title}]({pullRequest.url})
+              </p>
+            ))}
+          </code>
+        </div>
       </div>
     </Container>
   );

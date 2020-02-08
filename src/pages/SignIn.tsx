@@ -78,6 +78,7 @@ const SignInPage: React.FC<{}> = () => {
     <Container>
       <HeaderComponent></HeaderComponent>
       <div className="page-content">
+        {/* todo: formは別コンポーネントに切り出す */}
         <div className="token-form-wrapper">
           <form className="token-form" onSubmit={onSubmit}>
             <div className="token-form-input-wrapper">
