@@ -59,6 +59,10 @@ const Container = styled.div`
     background-color: #f5f5f5;
     cursor: pointer;
   }
+
+  .no-result {
+    text-align: center;
+  }
 `;
 
 const SearchPage: React.FC<{}> = () => {
@@ -118,11 +122,17 @@ const SearchPage: React.FC<{}> = () => {
         </div>
         <div className="pull-request-list">
           <code>
-            {pullRequests.map(pullRequest => (
-              <p key={pullRequest.title}>
-                - [{pullRequest.title}]({pullRequest.url})
-              </p>
-            ))}
+            {pullRequests !== null &&
+              pullRequests.length !== 0 &&
+              pullRequests.map(pullRequest => (
+                <p key={pullRequest.title}>
+                  - [{pullRequest.title}]({pullRequest.url})
+                </p>
+              ))}
+
+            {pullRequests !== null && pullRequests.length === 0 && (
+              <p className="no-result">No Result</p>
+            )}
           </code>
         </div>
       </div>

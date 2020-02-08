@@ -10,7 +10,7 @@ type PullRequest = {
 };
 
 export function usePullRequests() {
-  const [pullRequests, setPullRequests] = useState<PullRequest[]>([]);
+  const [pullRequests, setPullRequests] = useState<PullRequest[] | null>(null);
 
   const fetchPullRequests = async (
     teamName: string,
