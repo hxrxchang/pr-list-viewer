@@ -90,7 +90,7 @@ const SignInPage: React.FC<{}> = () => {
                 ref={register({ required: true })}
               />
               <button type="submit" className="form-button">
-                submit
+                Submit
               </button>
               {errors.token && (
                 <p className="error-message">token is required</p>

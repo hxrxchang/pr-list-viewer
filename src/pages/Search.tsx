@@ -112,11 +112,11 @@ const SearchPage: React.FC<{}> = () => {
               />
 
               {errors.baseBranch && (
-                <p className="error-message">BaseBranch name is required</p>
+                <p className="error-message">Base branch name is required</p>
               )}
             </div>
             <button className="form-button" type="submit">
-              submit
+              Search
             </button>
           </form>
         </div>
